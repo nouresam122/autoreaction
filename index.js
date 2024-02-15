@@ -1,8 +1,24 @@
-const Discord = require("discord.js-selfbot-v13") // npm i discord.js-selfbot-v13 (required)
-const client = new Discord.Client({checkUpdate: false})
-const sphinx = require("sphinx-self");
-const keep_alive = require("./keep_alive.js");
+// to raise the level of robot accounts | رفع لفل حسابات بروبوت
+const Discord = require("discord.js-selfbot-v13"); 
+const client = new Discord.Client({
+    intents: [Discord.Intents.FLAGS.GUILDS]
+});
+client.on('ready', async () => {
+  console.log(`${client.user.username} is ready!`);
+})
+const {userAccount} = require("sphinx-run");
+new userAccount(client, Discord).leveling({
+    channel: '1203670452535304225',
+    randomLetters: false, 
+    time: 10000, //الوقت 
+    type: 'ar' //الغةا 
+});
+client.login(process.env.token);
 
-new sphinx.Core(client).leveling({ channel: "1203670452535304225", randomLetters: true, type: 'ar', time: 3000 }) //hover for options
+const express = require("express");
+const app = express();
+app.listen(() => console.log("Server started"));
 
-client.login(process.env.TOKEN) //Not saved.
+app.use('/ping', (req, res) => {
+  res.send(new Date());
+});
